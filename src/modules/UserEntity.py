@@ -1,15 +1,13 @@
 from src.modules import rsaEntity
-import binascii
 
 
 def str2int(m):
-    mb = 0
+    mb = ""
     for i in m:
         chi = ord(i)
         if len(str(chi)) < 3:
             mb = mb + "0"
         mb = str(mb) + str(chi)
-    mb = mb[1:]
     mb = int(mb)
     return mb
 

@@ -7,11 +7,11 @@ for i in range(0, 40):
 
 def low_prime_gen():  # This method returns prime numbers form n = {0, 39}
     n = random.randint(0, 39)
-    res = n ** 2 + n + 41
+    res = n ** 2 + n + 39
     return res
 
 
-def get_roots(a):
+def get_roots(a):  # Return the roots of int a
     res = []
     for i in basicPrimeNums:
         if a % i != 0:
@@ -21,8 +21,8 @@ def get_roots(a):
     return res
 
 
-def euler_phi_function(n):  # This method returns the Euler's phi function to
-    aux = n  # a given int n
+def euler_phi_function(n):  # This method returns the Euler's phi function to a given int n
+    aux = n
     res = 1
     roots = get_roots(aux)
 
@@ -33,19 +33,19 @@ def euler_phi_function(n):  # This method returns the Euler's phi function to
     return int(res)
 
 
-def null_matrix_crafter(r, c):
+def null_matrix_crafter(r, c):  # Returns a Null Matrix fo the wanted size.
     A = [[0 for i in range(r)] for j in range(c)]
     return A
 
 
-def unit_matrix_crafter(r, c):
-    A = null_matrix_crafter(r, c)
-    for i in range(r):
+def unit_matrix_crafter(a):  # Returns a Unit Matrix of the wanted size.
+    A = null_matrix_crafter(a, a)
+    for i in range(a):
         A[i][i] = 1
     return A
 
 
-def multi_matrix(A, B):
+def multi_matrix(A, B):  # Returns the result of A * B, being A and B the given matrix.
     A_rows = len(A)
     A_columns = len(A[0])
     B_rows = len(B)
@@ -60,48 +60,28 @@ def multi_matrix(A, B):
     return res
 
 
-def is_coprime(a, b):
-    res = True
+def euclid_extended(a, b):  # Returns MCD of given a and b ints.
+    x = a
+    y = b
+    r = 1
+    while r != 0:
+        r = x % y
+        x = y
+        y = r
+    return x
 
-    for i in get_roots(a):
-        for j in get_roots(b):
-            if i == j:
-                res = False
-                break
 
+def is_coprime(a, b):  # Returns a boolean value, True if a and b are coprimes, False if they're not.
+    res = euclid_extended(a, b)
+    if res == 1:
+        res = True
+    else:
+        res = False
     return res
 
 
-def inv_mod(mod, a):
-    x = mod
-    y = a
-    base_matrix = null_matrix_crafter(2, 2)
-    base_matrix[0][1] = 1
-    base_matrix[1][0] = 1
-    product_m = unit_matrix_crafter(2, 2)
-
-    A = [[1],
-         [0]]
-
-    B = [[a],
-         [mod]]
-
-    quotients = []
-
-    end = False
-    'x = y*k + l -> y = l*k` + l`'
-    while not end:
-        r = int(x / y)
-        quotients.append(int(r))
-        if x % y == 0:
-            end = True
-        aux = y
-        y = x % y
-        x = aux
-        if end:
-            for i in quotients:
-                base_matrix[1][1] = -i
-                product_m = multi_matrix(base_matrix, product_m)
-    res = product_m[0][1]
-    res = res % mod
-    return res
+def inv_mod(mod, a):    # Returns the value of modular inverse of a for a given mod
+    for i in range(1, mod):
+        if (a * i) % mod == 1:
+            return i
+    return None

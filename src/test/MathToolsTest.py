@@ -16,4 +16,16 @@ def euler_phi_function_test():
         print("euler_phi_function does not work correcly")
 
 
-MathTools.inv_mod(9840, 17)
+def inv_mod_test():
+    a = MathTools.inv_mod(12, 19)
+    b = MathTools.inv_mod(11, 94)
+
+    if a == 7 and b == 2 :
+        print("Modular inverse works")
+    else:
+        print("modular inverse does not work")
+
+
+print(MathTools.is_coprime(686871,435397))
+print(MathTools.inv_mod(686871,435397))
+print((435397*125089)%MathTools.euler_phi_function(686871))
