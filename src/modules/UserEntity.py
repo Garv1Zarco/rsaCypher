@@ -1,38 +1,15 @@
 from src.modules import rsaEntity
+from src.mathTools import Converters
 
 
-def str2int(m):
-    mb = ""
-    for i in m:
-        chi = ord(i)
-        if len(str(chi)) < 3:
-            mb = mb + "0"
-        mb = str(mb) + str(chi)
-    mb = int(mb)
-    return mb
-
-
-def int2str(mb):
-    m = ""
-    mb = str(mb)
-    for j in range(int(len(mb)/3)):
-        chi = ""
-        ch = ""
-        for i in range(3):
-            chi = mb[j+i]
-            ch = ch + chi
-        m = m + chr(int(ch))
-    return m
-
-
-class User():
+class User:
     def cypher(Self, Rsa, m):
         public_key = rsaEntity.Rsa.get_public_key(Rsa)
         e = public_key[1]
         n = public_key[0]
-        mb = str2int(m)
+        mb = Converters.str2int(m)
 
-        c = (mb ** e) % n
+        c = pow(mb, e, n)
         return c
 
     def decypher(Self, Rsa, c):
@@ -40,7 +17,7 @@ class User():
         d = private_key[1]
         n = private_key[0]
 
-        mb = (c ** d) % n
+        mb = pow(c, d, n)
 
-        m = int2str(mb)
+        m = Converters.int2str(mb)
         return m

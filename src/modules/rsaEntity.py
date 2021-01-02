@@ -18,7 +18,8 @@ class Rsa:
         while self.p == self.q:
             self.p = MathTools.low_prime_gen()
             self.q = MathTools.low_prime_gen()
-        self.n = self.p * self.q
+            self.n = self.p * self.q
+
         phi_n = MathTools.euler_phi_function(self.n)
 
         coprime = False
@@ -26,6 +27,7 @@ class Rsa:
         while not coprime:
             self.e = random.randint(2, phi_n - 1)
             coprime = MathTools.is_coprime(self.e, phi_n)
+            print(coprime)
 
         self.d = MathTools.inv_mod(phi_n, self.e)
 
