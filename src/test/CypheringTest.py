@@ -5,12 +5,14 @@ from src.mathTools import MathTools
 
 def cypher_test():
     x = 0
-
-    for i in range(1000):
+    iterations = 1000
+    for i in range(iterations):
         rsa = rsaEntity.Rsa()
         rsa.key_gen()
         public_key = rsaEntity.Rsa.get_public_key(rsa)
         private_key = rsaEntity.Rsa.get_private_key(rsa)
+        p = rsa.p
+        q = rsa.q
         e = public_key[1]
         ne = public_key[0]
         d = private_key[1]
@@ -29,10 +31,14 @@ def cypher_test():
             print("WARNING: n is lower than message")
 
         n = nd
+        print("p = ", p)
+        print("q = ", q)
         print("n = ", n)
         print("e = ", e)
         print("d = ", d)
         print("phi(n) = ", MathTools.euler_phi_function(n))
+
+        print("p roots: ", MathTools.get_roots(p),"p roots: ", MathTools.get_roots(q))
 
         c = pow(mb, e, n)
         mbx = pow(c, d, n)
@@ -43,7 +49,7 @@ def cypher_test():
         else:
             x = x + 1
             print("Cyphering successed")
-    print(x)
+    print((x/iterations)*100, "%")
 cypher_test()
 
 

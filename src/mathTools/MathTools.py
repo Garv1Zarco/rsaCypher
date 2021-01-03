@@ -6,8 +6,8 @@ for i in range(0, 40):
 
 
 def low_prime_gen():  # This method returns prime numbers form n = {0, 39}
-    n = random.randint(0, 39)
-    res = n ** 2 + n + 39
+    n = random.randint(37, len(basicPrimeNums)-1)
+    res = basicPrimeNums[n]
     return res
 
 

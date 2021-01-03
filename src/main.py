@@ -11,9 +11,9 @@ def main():
     print("This value have to be 1: ", (rsa.d * rsa.e) % MathTools.euler_phi_function(rsa.n))
     sender = UserEntity.User()
     reciever = UserEntity.User()
-    m = "z"
+    m = "me"
     c = sender.cypher(rsa, m)
-    m = reciever.decypher(rsa, c)
+    m = reciever.decipher(rsa, c)
     print("Final message: ", m)
 
 
