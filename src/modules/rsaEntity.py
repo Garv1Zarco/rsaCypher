@@ -21,7 +21,7 @@ class Rsa:
             self.q = MathTools.low_prime_gen()  # Prime number q
             self.n = self.p * self.q  # n = p * q
 
-        phi_n = MathTools.euler_phi_function(self.n)  # Euler phi function for n
+        phi_n = MathTools.euler_phi_function(self.p, self.q)  # Euler phi function for n
 
         coprime = False
 

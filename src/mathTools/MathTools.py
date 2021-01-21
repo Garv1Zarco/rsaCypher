@@ -6,12 +6,12 @@ for i in range(0, 40):
 
 
 def low_prime_gen():  # This method returns prime numbers form n = {0, 39}
-    n = random.randint(37, len(basicPrimeNums)-1)
+    n = random.randint(37, len(basicPrimeNums) - 1)
     res = basicPrimeNums[n]
     return res
 
 
-def get_roots(a):  # Return the roots of int a
+def get_roots(a):  # Return the divisors of int a
     res = []
     for i in basicPrimeNums:
         if a % i != 0:
@@ -21,27 +21,15 @@ def get_roots(a):  # Return the roots of int a
     return res
 
 
-def euler_phi_function(n):  # This method returns the Euler's phi function to a given int n
-    aux = n
-    res = 1
-    roots = get_roots(aux)
+def euler_phi_function(p, q):  # This method returns the Euler's phi function to a given int n
 
-    for i in roots:
-        res = (1 - 1 / i) * res
+    res = (p - 1) * (q - 1)
 
-    res = res * n
-    return int(res)
+    return res
 
 
 def null_matrix_crafter(r, c):  # Returns a Null Matrix fo the wanted size.
     A = [[0 for i in range(r)] for j in range(c)]
-    return A
-
-
-def unit_matrix_crafter(a):  # Returns a Unit Matrix of the wanted size.
-    A = null_matrix_crafter(a, a)
-    for i in range(a):
-        A[i][i] = 1
     return A
 
 
@@ -80,7 +68,7 @@ def is_coprime(a, b):  # Returns a boolean value, True if a and b are coprimes, 
     return res
 
 
-def inv_mod(mod, a):    # Returns the value of modular inverse of a for a given mod
+def inv_mod(mod, a):  # Returns the value of modular inverse of a for a given mod
     for i in range(1, mod):
         if (a * i) % mod == 1:
             return i

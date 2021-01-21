@@ -7,6 +7,7 @@ from src.mathTools import Converters
 
 
 class User:
+
     def cypher(Self, Rsa, m):  # Returns a cyphered message c from a plain message m
         public_key = rsaEntity.Rsa.get_public_key(Rsa)  # Public key get
         e = public_key[1]
